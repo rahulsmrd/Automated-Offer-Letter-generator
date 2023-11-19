@@ -1,0 +1,149 @@
+{% extends "home/base.html" %}
+{% block title %}Create Offer Letter{% endblock %}
+{% block actiavte_create %}active{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="m-5" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp"
+                            value="{{data.full_name}}" onblur="preview()">
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                            value="{{data.email}}" onblur="preview()">
+                        <div id="emailHelp" class="form-text">We'll never share your email.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="course" class="form-label">Course</label>
+                        <input type="text" class="form-control" id="course" name="course" onblur="preview()"
+                            value="{{data.course}}">
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="start_date" class="form-label">Date of join</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date"
+                            aria-describedby="emailHelp" onblur="preview()" value="{{data.join_date|date:'Y-m-d' }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-6 screen">
+                        <label for="end_date" class="form-label">Date of ending</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" onblur="preview()"
+                            value="{{data.end_date|date:'Y-m-d'}}">
+                    </div>
+                    <div class="mb-3 col-6 screen">
+                        <label for="exampleInputPassword1" class="form-label">Ref. ID</label>
+                        <input type="text" class="form-control" value="{{data.unique_code}}" name="unique_code" readonly
+                            id="exampleInputPassword1">
+                    </div>
+                </div>
+                {% if update %}
+                <button type="submit" class="btn btn-primary">Update</button>
+                {% else %}
+                <button type="submit" class="btn btn-primary">Save</button>
+                {% endif %}
+            </form>
+        </div>
+        <div class="col-md-6 scrolling">
+            <div class="container my-5">
+                <h1 class="text-center">Preview</h1>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <b>
+                            {% if update %}
+                            <p class="ms-5">Date : {{ data.date_of_creation | date:"d-M-Y" }}</p>
+                            {% else %}
+                            <p class="ms-5">Date : {% now "d-M-Y" %}</p>
+                            {% endif %}
+                        </b>
+                    </div>
+                    <div class="col-6 text-end">
+                        <b>
+                            <p class="me-5">Ref. ID : {{ data.unique_code }}</p>
+                        </b>
+                    </div><br><br>
+                    <b>
+                        <h4 style="text-decoration: underline;" class="text-center">INTERNSHIP : Offer Letter</h4>
+                    </b>
+                </div>
+                <div class="container">
+                    <br><br><br>
+                    <span style="font-weight: 900;">To,<br>
+                        <span id="preview_name">{{ data.full_name }}</span>,</span><br><br>
+
+                    With reference to your interview, we are pleased to inform you that you have been selected as "<span
+                        style="font-weight: 800;" id="preview_course">{{ data.course }}</span>" in our NGO - “Suvidha
+                    Mahila Mandal”, with the following terms and conditions.
+                    <br><br>
+                    <ul>
+                        <li>You will provide the Fundraising Services to SUVIDHA FOUNDATION and deliver the effect of
+                            the
+                            work.
+                        </li>
+                        <li>The internship period will be from <span style="font-weight: 800;"
+                                id="preview_start_date">{{ data.join_date | date:"d-M-Y" }}</span>, to <span
+                                style="font-weight: 800;" id="preview_end_date">{{ data.end_date | date:"d-M-Y"}}</span>.</li>
+                        <li>Your work base station is work from the office and six days a week.</li>
+                        <li>It is a paid Internship. The certificate of completion will be given only if you invest 6
+                            hours
+                            daily on all working days. You must participate in the daily team meetings through Google
+                            Meet.
+                            Also, the letter holds no value without a completion certificate from us with a unique
+                            identification number, which can be verified online.</li>
+                        <li>During the internship period and thereafter, you will not give out to anyone in writing or
+                            by
+                            word
+                            of mouth or otherwise particulars or details of work process, technical know-how, research
+                            carried
+                            out, security arrangements and/or matters of confidential or secret nature which you may
+                            come
+                            across
+                            during your service in this organization.</li>
+                        <li>In case of any misconduct which causes financial loss to the NGO or hurts its reputation and
+                            goodwill of the organization, the management has the right to terminate any intern. In case
+                            of
+                            termination, the management will not be issuing certificates to the intern.</li>
+                        <li>It is necessary for an intern to return all the organization belongings (login credentials,
+                            media
+                            created, and system) at the time of leaving the organization. A clearance and experience
+                            certificate
+                            will be given after completing the formalities. If any employee leaves the job/Internship
+                            without
+                            completing the formality, the organization will take necessary action. All the
+                            software/courses/data
+                            developed by the interns or any employee for the Suvidha Mahila Mandal are intellectual
+                            property
+                            of
+                            the organization & are protected by Indian Copyright Act. All the data generated during the
+                            internship period, is the property right of organization and can be used for any purpose. In
+                            case of
+                            any piracy, strict legal action will be taken by the organization against erring persons. No
+                            information or source codes or course curriculum or business secrets or financial position
+                            or
+                            other
+                            details of organization shall be discussed among friends or relatives or our competitors.
+                            Such
+                            leakage of information is likely to cause financial loss to the organization. Hence, in such
+                            a
+                            case,
+                            the organization will be terminating the employee immediately and if required, further legal
+                            action
+                            will be taken against that intern.</li><br>
+                    </ul><br><br>
+                    <div class="container">
+                        <img src="signature" alt="signature"><br><br>
+                        Mrs. Shobha Motghare <br>
+                        Secretary, Suvidha Mahila Mandal
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock body %}

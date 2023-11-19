@@ -1,0 +1,26 @@
+{% extends "home/base.html" %}
+
+{% block body %}
+    {% if for_otp %}
+    <div class="container text-center">
+        <h1 style='text-align:center' class="m-5">Please Enter your OTP here</h1>
+        <h5>The mail for which OTP was Sent</h5>
+        <input type="email" name="email" id="email" value={{email}} readonly style="border-radius: 1em;padding: 0.2em; width: 13em; font-size: 20px;text-align: center;" class="my-2">
+        <form style="text-align: center;" method="post">
+            {% csrf_token %}
+            <h5 class="mt-5 mb-3">Please Enter OTP</h5>
+            <input type="number" name="otp" id="otp" style="border-radius: 1em;padding: 0.5em; width: 10em; font-size: 16px;text-align: center;"><br>
+            <button type="submit" class="btn btn-outline-success mt-5">Open Offer Letter</button>
+        </form>
+    </div>
+    {% else %}
+    <form style="text-align: center;" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <h1 class="m-5">Enter Your Email</h1>
+            <input type="email" name="email" id="email" style="border-radius: 1em;padding: 0.7em; width: 20em; font-size: 20px;text-align: center;"><br>
+            <button type="submit" class="btn btn-outline-warning my-5">Proceed</button>
+        </div>
+    </form>
+    {% endif %}
+{% endblock body %}

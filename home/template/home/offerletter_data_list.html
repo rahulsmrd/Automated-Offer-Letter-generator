@@ -1,0 +1,39 @@
+{% extends "home/base.html" %}
+{% block title %}All Offer letters{% endblock title %}
+{% block actiavte_home %}active{% endblock %}
+{% block body %}
+<div class="container-fluid ">
+    <h1 class="mt-5">Offer Letter(s)</h1><br><br>
+    <table class="table text-center">
+        <thead>
+            <tr class="fs-4">
+                <th scope="col" class="col-1">S.No</th>
+                <th scope="col" class="col-3">Name</th>
+                <th scope="col" class="col-3">Email</th>
+                <th scope="col" class="col-1">PDF</th>
+                {% if user.is_superuser %}
+                <th scope="col" class="col-1">Edit</th>
+                <th scope="col" class="col-2">Mailing</th>
+                {% else %}
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody class="fs-5">
+            {% for user_data in offerletters %}
+            <tr>
+                <th scope="row">{{user_data.pk}}</th>
+                <td>{{user_data.full_name}}</td>
+                <td>{{user_data.email}}</td>
+                <td><a href="{% url 'home:preview' pk=user_data.pk %}"><i class="bi bi-file-earmark-pdf fs-4"
+                            style="color: red;"></i></a></td>
+                {% if user.is_superuser %}
+                <td><a href="{% url 'home:update' pk=user_data.pk %}"><i class="bi bi-pencil-square fs-5"></i></a></td>
+                <td><a href="{% url 'home:send' user_data.pk %}" class="btn btn-outline-success">Resend Mail</a></td>
+                {% else %}
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

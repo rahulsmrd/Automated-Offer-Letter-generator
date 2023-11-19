@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+</head>
+
+<body style="font-family: 'Times New Roman', Times, serif;">
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <img src="{% static 'suvidha_foundation_logo.jpg' %}" alt="no image" class="me-3"
+                    style="border-radius: 10em;width: 3.5em; height:3.5em;">
+                <a class="navbar-brand fs-4" href="/">Suvidha Foundation</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link {% block actiavte_home %}{% endblock %} mx-5 fs-5" aria-current="page" href="{% url 'home:start' %}">Home</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 {% block actiavte_create %}{% endblock %}" href="{% url 'home:create' %}">Create Offer Letter</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <form class="d-flex">
+                        {% if user.is_authenticated %}
+                        <h4 style="color: white;" class="me-5 mt-2">Welcome  : {{user.username}}</h4>
+                        <a href='{% url "user:logout" %}' class="btn btn-outline-danger me-5 fs-5">Logout</a>
+                        {% else %}
+                        <a href='{% url "user:signup" %}' class="btn btn-outline-primary me-5 fs-5">Signup</a>
+                        <a href='{% url "user:login" %}' class="btn btn-outline-success me-5 fs-5">Login</a>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    {% block body %}{% endblock %}
+</body>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview and Print</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="{% static 'script2.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        @page {
+            size: letter portrait;
+            margin: 2cm;
+        }
+    </style>
+</head>
+
+<body style="font-family: 'Times New Roman', Times, serif;">
+    <div class="mx-0" id="content" style="background-color: white;">
+        <div class="d-flex header" style="gap: 3.5em;">
+            <div class="text-center logo">
+
+                <img src="{% static 'suvidha_foundation_logo.jpg' %}" alt="LOGO" class="logo"
+                    style="border-radius: 10em;width: 10.5em; height:10.5em;">
+            </div>
+            <div class="text-center header1">
+                <p class="mb-0 mt-3 fs-6">Suvidha Mahila Mandal, Walni</p>
+                <p class="mb-0">Registration No. MH/568/1995</p>
+                <p class="mb-0">F No. 12669</p>
+                <p class="mb-0">Registered under Society Act 1860</p>
+            </div>
+            <div class="text-center header2">
+                <p class="mb-0 mt-2">H.No. 1951, W.N.4, Khaperkheda, Saoner, </p>
+                <p class="my-0">Nagpur, Maharashtra, India</p>
+                <p class="my-0">Contact: (+91)08010996763</p>
+                <a href="mailto:info@suvidhafoundationedutech.Org">info@suvidhafoundationedutech.Org</a><br>
+                <a href="http://www.suvidhafoundationedutech.org/"
+                    target="_blank">http://www.suvidhafoundationedutech.org/</a>
+            </div>
+
+        </div>
+        <hr style="margin: 1 0;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <b>
+                        <p>Date : {{ date_of_creation | date:"d-M-Y" }}</p>
+                    </b>
+                </div>
+                <div class="col-sm-6 text-end">
+                    <b>
+                        <p class="me-5">Ref Id : {{ unique_code }}</p>
+                    </b>
+                </div><br><br>
+                <b>
+                    <h4 style="text-decoration: underline;" class="text-center">INTERNSHIP : Offer Letter</h4>
+                </b>
+            </div>
+            <div class="container-fluid">
+                <br><br>
+                <span style="font-weight: 900;">To,<br>
+                    <span id="preview_name">{{ full_name }}</span>,</span><br><br>
+
+                With reference to your interview, we are pleased to inform you that you have been selected as "<span
+                    style="font-weight: 800;" id="preview_course">{{ course }}</span>" in our NGO - “Suvidha Mahila
+                Mandal”, with the following terms and conditions.
+                <br><br>
+                <ul>
+                    <li>You will provide the Fundraising Services to SUVIDHA FOUNDATION and deliver the effect of the
+                        work.
+                    </li>
+                    <li>The internship period will be from <span style="font-weight: 800;" id="preview_start_date">
+                            {{ join_date | date:"d-M-Y" }}</span>, to <span style="font-weight: 800;"
+                            id="preview_end_date">{{ end_date | date:"d-M-Y" }}</span>.</li>
+                    <li>Your work base station is work from the office and six days a week.</li>
+                    <li>It is a paid Internship. The certificate of completion will be given only if you invest 6 hours
+                        daily on all working days. You must participate in the daily team meetings through Google Meet.
+                        Also, the letter holds no value without a completion certificate from us with a unique
+                        identification number, which can be verified online.</li>
+                    <li>During the internship period and thereafter, you will not give out to anyone in writing or by
+                        word
+                        of mouth or otherwise particulars or details of work process, technical know-how, research
+                        carried
+                        out, security arrangements and/or matters of confidential or secret nature which you may come
+                        across
+                        during your service in this organization.</li>
+                    <li>In case of any misconduct which causes financial loss to the NGO or hurts its reputation and
+                        goodwill of the organization, the management has the right to terminate any intern. In case of
+                        termination, the management will not be issuing certificates to the intern.</li>
+                    <li>It is necessary for an intern to return all the organization belongings (login credentials,
+                        media
+                        created, and system) at the time of leaving the organization. A clearance and experience
+                        certificate
+                        will be given after completing the formalities. If any employee leaves the job/Internship
+                        without
+                        completing the formality, the organization will take necessary action. All the
+                        software/courses/data
+                        developed by the interns or any employee for the Suvidha Mahila Mandal are intellectual property
+                        of
+                        the organization & are protected by Indian Copyright Act. All the data generated during the
+                        internship period, is the property right of organization and can be used for any purpose. In
+                        case of
+                        any piracy, strict legal action will be taken by the organization against erring persons. No
+                        information or source codes or course curriculum or business secrets or financial position or
+                        other
+                        details of organization shall be discussed among friends or relatives or our competitors. Such
+                        leakage of information is likely to cause financial loss to the organization. Hence, in such a
+                        case,
+                        the organization will be terminating the employee immediately and if required, further legal
+                        action
+                        will be taken against that intern.</li><br>
+                </ul><br><br>
+                <div class="container">
+                    <img src="signature" alt="signature"><br><br>
+                    Mrs. Shobha Motghare <br>
+                    Secretary, Suvidha Mahila Mandal
+                    <br><br>
+                </div>
+                <div class="container text-center m-5">
+                    <button id="print_pdf" onclick="print_page()" class="btn btn-outline-primary">Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
