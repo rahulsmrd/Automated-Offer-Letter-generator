@@ -114,7 +114,6 @@ def otp(request,pk):
         else:
             return HttpResponse('Please Enter Correct OTP sent to your Given Mail Id')
     otp_fg=otp_generator()
-    print(const[1])
     j='OTP is '+str(otp_fg[1])
 
     subject ="Your One Time Password for accessing Offere Letter !!!"
@@ -141,7 +140,6 @@ from django.utils.html import strip_tags
 
 def send(request,pk):
     k=offerletter_data.objects.filter(pk=pk).values()
-    print(k[0]['email'])
     send_offerletter(k[0]['email'])
     return redirect('home:start')
 
